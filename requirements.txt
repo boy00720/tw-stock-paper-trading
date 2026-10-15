@@ -1,25 +1,25 @@
 # 基礎依賴
-requests>=2.28.0           # HTTP 請求庫
+requests>=2.33.0           # HTTP 請求庫（安全下限）
 beautifulsoup4>=4.11.0     # HTML 解析
-lxml>=4.9.0              # XML/HTML 解析器
+lxml>=6.1.0              # XML/HTML 解析器（安全下限）
 PyYAML>=6.0               # YAML 解析
 APScheduler>=3.10.0       # 任務調度
-python-dotenv>=0.21.0     # 環境變量管理
+python-dotenv>=1.2.2      # 環境變量管理（安全下限）
 anthropic>=0.40.0         # Claude API SDK（M6 sim/advisor 用，走 cc-switch 跟隨模式）
 
 # 資料科學
 pandas>=1.5.0            # 數據處理
 numpy>=1.22.0             # 數值計算
-scipy>=1.9.0              # 科學計算
+scipy>=1.10.0             # 科學計算（安全下限）
 yfinance>=0.2.0           # 股市數據
 finmind>=0.2.0            # 台股數據
 ib_insync>=0.9.86         # IBKR TWS/Gateway 只讀行情探針與美股 Research Pack
 
 # 機器學習
-torch>=1.13.0             # PyTorch
-transformers>=4.28.0      # Hugging Face Transformers
-sentence-transformers>=2.2.0  # 文本嵌入
-chromadb>=0.5.0               # 向量資料庫（記憶管家 W）
+torch>=2.13.0,<3          # PyTorch（安全下限；僅記憶管家 W 間接使用）
+transformers>=5.10.0,<6   # Hugging Face Transformers（安全下限）
+sentence-transformers>=5.6.0,<6  # 文本嵌入（安全下限；<6 避免跨大版本）
+chromadb>=0.5.0               # 向量資料庫（記憶管家 W）；截至 2026-10-15 有 4 個已知漏洞尚無修復版，見 README「依賴安全維護」
 ddgs>=7.0.0                   # 深度研究 W 的搜尋來源
 
 # 工具庫
@@ -32,13 +32,19 @@ pandas-datareader>=0.10.0  # 資料讀取
 requests      # 飛書 Webhook 已經在 requests 中包含
 
 # PDF 報告生成
-weasyprint>=66.0           # HTML→PDF（需系統安裝 pango+cairo）
-jinja2>=3.1.0              # 結構化 HTML 模板渲染
+weasyprint>=70.0           # HTML→PDF（需系統安裝 pango+cairo；安全下限）
+jinja2>=3.1.6              # 結構化 HTML 模板渲染（安全下限）
 
 # 自動化
 schedule>=1.1.0          # 定時任務
 playwright>=1.30.0        # 自動化測試
-Selenium>=4.7.0         # 瀏覽器自動化
+Selenium>=4.14.0        # 瀏覽器自動化（安全下限）
+
+# 間接依賴安全下限（網路請求與 HTML 解析鏈路；不直接 import，僅約束版本）
+urllib3>=2.8.0            # requests 底層 HTTP
+idna>=3.15                # 網域名稱編碼
+soupsieve>=2.9.0          # beautifulsoup4 的 CSS 選擇器
+pillow>=12.3.0            # weasyprint / matplotlib 圖像處理
 
 # 開發工具
 black>=22.0.0             # 代碼格式化

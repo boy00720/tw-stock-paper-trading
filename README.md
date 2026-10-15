@@ -76,6 +76,31 @@ cd /Users/w/Cursor/automation
 ./sync_cursor_model.sh claude-sonnet-4-6 https://api.anthropic.com sk-ant-xxxx
 ```
 
+## 專案定位與開源來源
+- 本專案是個人維護的台股自動化分析系統，用於台股市場的數據分析與**模擬交易**（不連接真實下單）。
+- 台股適配：數據源以 FinMind 等台股資料為主（如 `utils/finmind_helper.py`），並針對台股調整了選股／監控策略與輸出（如 `scripts/strategy_scanner.py`、`scripts/stock_screener.py`）。模擬盤位於 `sim/`。
+- 開源來源：大盤複盤步驟透過子進程呼叫同層目錄的開源專案 [daily_stock_analysis](https://github.com/ZhuLinsen/daily_stock_analysis)（MIT 授權，見 `orchestrator.py`）；依 `sim/REQUIREMENTS.md` 的設計，模擬盤的部分數據抓取邏輯也參考自該專案。這些部分的原創工作屬於原作者。
+
+## 依賴安全維護
+定期以 [pip-audit](https://github.com/pypa/pip-audit) 掃描依賴的已知漏洞（PyPI / OSV 資料庫），並調高 `requirements.txt` 的版本下限，避免新安裝的環境裝到已知有漏洞的版本。
+
+```bash
+# 1) 掃描目前運行環境（launchd 任務使用的直譯器）
+~/.homebrew/bin/python3 -m pip install -U pip-audit
+~/.homebrew/bin/python3 -m pip_audit
+
+# 2) 依 requirements.txt 的新下限升級
+~/.homebrew/bin/python3 -m pip install -U -r requirements.txt
+
+# 3) 升級後跑離線測試，確認台股抓取、策略與模擬盤邏輯不受影響
+~/.homebrew/bin/python3 -m pytest tests sim/tests -m "not network"
+```
+
+維護原則：
+- 只調整依賴版本下限，不順手改業務代碼；可能跨大版本的套件（torch、transformers、sentence-transformers）同時設上限 `<下一大版本`，避免意外破壞。
+- 每次更新為獨立提交，提交訊息以 `chore(deps):` 開頭，寫明涉及的套件與驗證方式。
+- 已知未修復：`chromadb`（記憶管家 W 使用）截至 2026-10-15 仍有已知漏洞，上游尚無修復版，暫時保留並持續追蹤。
+
 ## 擴展功能
 - 支持多種通知渠道
 - 可定製的數據處理流程
