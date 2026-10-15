@@ -79,7 +79,7 @@ cd /Users/w/Cursor/automation
 ## 專案定位與開源來源
 - 本專案是個人維護的台股自動化分析系統，用於台股市場的數據分析與**模擬交易**（不連接真實下單）。
 - 台股適配：數據源以 FinMind 等台股資料為主（如 `utils/finmind_helper.py`），並針對台股調整了選股／監控策略與輸出（如 `scripts/strategy_scanner.py`、`scripts/stock_screener.py`）。模擬盤位於 `sim/`。
-- 開源來源：大盤複盤步驟透過子進程呼叫同層目錄的開源專案 [daily_stock_analysis](https://github.com/ZhuLinsen/daily_stock_analysis)（MIT 授權，見 `orchestrator.py`）；依 `sim/REQUIREMENTS.md` 的設計，模擬盤的部分數據抓取邏輯也參考自該專案。這些部分的原創工作屬於原作者。
+- 開源來源：本專案早期以開源專案 [daily_stock_analysis](https://github.com/ZhuLinsen/daily_stock_analysis)（MIT 授權）作為大盤複盤元件，`orchestrator.py` 仍保留以子進程呼叫它的可選步驟，但自 2026-06 起預設停用（`DSA_MARKET_REVIEW_ENABLED`，預設關閉）；依 `sim/REQUIREMENTS.md` 的設計，模擬盤的部分數據抓取邏輯參考自該專案。這些部分的原創工作屬於原作者。
 
 ## 依賴安全維護
 定期以 [pip-audit](https://github.com/pypa/pip-audit) 掃描依賴的已知漏洞（PyPI / OSV 資料庫），並調高 `requirements.txt` 的版本下限，避免新安裝的環境裝到已知有漏洞的版本。
