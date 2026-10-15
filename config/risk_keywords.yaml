@@ -1,0 +1,59 @@
+# 國際 / 個股風險關鍵字 — 供 News W 風險雷達抽取
+# 命中即計入對應風險維度
+
+international:
+  tariff:
+    - "關稅"
+    - "tariff"
+    - "貿易戰"
+    - "trade war"
+  geopolitics:
+    - "台海"
+    - "南海"
+    - "烏俄"
+    - "中東"
+    - "以色列"
+    - "伊朗"
+    - "紅海"
+  fed:
+    - "升息"
+    - "降息"
+    - "FOMC"
+    - "Powell"
+    - "rate hike"
+    - "rate cut"
+    - "聯準會"
+  energy:
+    - "油價"
+    - "OPEC"
+    - "原油"
+  semiconductor_policy:
+    - "晶片法案"
+    - "CHIPS Act"
+    - "出口管制"
+    - "實體清單"
+
+individual:
+  lockup:
+    - "閉鎖期"
+    - "解禁"
+    - "lock-up"
+  earnings:
+    - "法說"
+    - "財報"
+    - "財測"
+    - "獲利下修"
+    - "下修展望"
+  governance:
+    - "董事會改選"
+    - "股東會"
+    - "經營權"
+    - "內線交易"
+    - "掏空"
+  negative:
+    - "下市"
+    - "停止交易"
+    - "全額交割"
+    - "處置"
+    - "警示"
+    - "財務危機"

@@ -1,0 +1,91 @@
+{
+  "date": "2026-04-22",
+  "source": "reconstructed_from_committed_watchlist_snapshot",
+  "engine_version": "reconstructed_from_committed_watchlist_snapshot",
+  "passed_count": 2,
+  "strict_passed_count": 1,
+  "results": [
+    {
+      "symbol": "3661.TW",
+      "name": "世芯-KY（3661）",
+      "sector": "半導體",
+      "passed": true,
+      "strict_passed": true,
+      "checks": {
+        "① 漲幅 3%-7%": true,
+        "② 近3日動能>7%": true,
+        "③ 市值<3000億": false,
+        "④ 量比>1.5": true,
+        "⑤ 換手率 3%-10%": true,
+        "⑥ 收在開盤上+近5日新高 (代理)": false
+      },
+      "values": {
+        "當日漲幅": "3.13%",
+        "現價": 3625.0,
+        "近3日最大漲幅": "8.26%",
+        "市值(億)": 3239.0,
+        "量比": 2.15,
+        "換手率估": "5.85%",
+        "換手率來源": "sharesOutstanding",
+        "開盤": 3745.0,
+        "今日高": 3985.0,
+        "通過數": 4,
+        "未通過數": 2,
+        "無資料": 0,
+        "score": 30,
+        "core_ok": true,
+        "hard_fails": [
+          "③ 市值<3000億"
+        ],
+        "strict_hard_fails": []
+      },
+      "missing": [],
+      "notes": [
+        "⑥ 為日線代理；實際需盤中 14:30 後看分時圖"
+      ],
+      "error": null
+    },
+    {
+      "symbol": "5483.TWO",
+      "name": "中美晶（5483）",
+      "sector": "半導體",
+      "passed": true,
+      "strict_passed": false,
+      "checks": {
+        "① 漲幅 3%-7%": true,
+        "② 近3日動能>7%": false,
+        "③ 市值<3000億": true,
+        "④ 量比>1.5": true,
+        "⑤ 換手率 3%-10%": true,
+        "⑥ 收在開盤上+近5日新高 (代理)": false
+      },
+      "values": {
+        "當日漲幅": "5.62%",
+        "現價": 131.5,
+        "近3日最大漲幅": "4.10%",
+        "市值(億)": 826.0,
+        "量比": 2.81,
+        "換手率估": "4.15%",
+        "換手率來源": "sharesOutstanding",
+        "開盤": 133.0,
+        "今日高": 141.0,
+        "通過數": 4,
+        "未通過數": 2,
+        "無資料": 0,
+        "score": 30,
+        "core_ok": true,
+        "hard_fails": [
+          "② 近3日動能>7%"
+        ],
+        "strict_hard_fails": [
+          "② 近3日動能>7%"
+        ]
+      },
+      "missing": [],
+      "notes": [
+        "⑥ 為日線代理；實際需盤中 14:30 後看分時圖"
+      ],
+      "error": null
+    }
+  ]
+}

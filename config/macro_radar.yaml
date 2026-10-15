@@ -1,0 +1,136 @@
+# 美股宏觀消息面雷達配置
+# 本線只做消息面與宏觀日曆，不使用 IBKR / 盈透作消息源。
+
+timezone:
+  local: Asia/Taipei
+  us_eastern: America/New_York
+
+modes:
+  midday:
+    title: "美股午間宏觀雷達"
+    query: "US stock market macro news today Fed inflation Treasury yields dollar oil geopolitics market outlook"
+    push_policy: fixed_summary
+  afterhours:
+    title: "美股盤後宏觀/財報窗"
+    query: "US stock market after hours earnings macro news Fed Treasury yields futures today"
+    push_policy: fixed_summary
+  weekend:
+    title: "美股休市週末宏觀前瞻"
+    query: "US markets week ahead economic calendar Fed CPI PCE NFP FOMC Treasury yields earnings geopolitics"
+    push_policy: fixed_summary
+  event_check:
+    title: "美股宏觀事件快訊"
+    query: "Is there a major US macroeconomic data release or FOMC decision today ({date_taipei}; US Eastern date {date_et})? Focus only on actual releases or decisions in the last 24 hours: CPI, PCE, PPI, nonfarm payrolls, FOMC rate decision, retail sales, GDP. If none, say no major release. Include actual vs forecast and market reaction only if released."
+    push_policy: high_only
+
+# 宏觀事件時間表用「規律 + Tavily 動態確認」：不寫死具體日期，避免過期。
+event_watchlist:
+  high:
+    - key: fomc_decision
+      label: FOMC 利率決議
+      category: fed
+      usual_time_et: "14:00"
+      check_time_taipei_edt: "02:05"
+      check_time_taipei_est: "03:05"
+      keywords: ["FOMC", "Federal Reserve decision", "Fed decision", "rate decision", "dot plot", "SEP"]
+    - key: cpi
+      label: CPI 通膨數據
+      category: inflation
+      usual_time_et: "08:30"
+      check_time_taipei_edt: "20:35"
+      check_time_taipei_est: "21:35"
+      keywords: ["CPI", "consumer price index", "inflation data"]
+    - key: nfp
+      label: 非農就業 NFP
+      category: jobs
+      usual_time_et: "08:30"
+      check_time_taipei_edt: "20:35"
+      check_time_taipei_est: "21:35"
+      keywords: ["nonfarm payrolls", "NFP", "jobs report", "unemployment rate"]
+    - key: pce
+      label: PCE 物價
+      category: inflation
+      usual_time_et: "08:30"
+      check_time_taipei_edt: "20:35"
+      check_time_taipei_est: "21:35"
+      keywords: ["PCE", "personal consumption expenditures", "core PCE"]
+  medium:
+    - key: ppi
+      label: PPI 生產者物價
+      category: inflation
+      usual_time_et: "08:30"
+      keywords: ["PPI", "producer price index"]
+    - key: retail_sales
+      label: 零售銷售
+      category: growth
+      usual_time_et: "08:30"
+      keywords: ["retail sales"]
+    - key: gdp
+      label: GDP
+      category: growth
+      usual_time_et: "08:30"
+      keywords: ["GDP", "gross domestic product"]
+    - key: fed_speech
+      label: Fed 官員談話
+      category: fed
+      keywords: ["Fed speech", "Federal Reserve Governor", "Fed Chair", "Powell", "Warsh"]
+
+preferred_news_domains:
+  - cnbc.com
+  - marketwatch.com
+  - wsj.com
+  - finance.yahoo.com
+  - federalreserve.gov
+  - newyorkfed.org
+  - stlouisfed.org
+  - tradingeconomics.com
+  - investopedia.com
+  - kiplinger.com
+  - apnews.com
+  - reuters.com
+  - bloomberg.com
+  - kitco.com
+
+severity_keywords:
+  high:
+    - "FOMC"
+    - "rate decision"
+    - "rate cut"
+    - "rate hike"
+    - "dot plot"
+    - "CPI"
+    - "PCE"
+    - "nonfarm payrolls"
+    - "NFP"
+    - "jobs report"
+    - "unexpectedly"
+    - "hotter than expected"
+    - "cooler than expected"
+    - "crisis"
+    - "war"
+    - "sanctions"
+    - "tariff"
+  medium:
+    - "Fed"
+    - "Treasury yields"
+    - "yield"
+    - "inflation"
+    - "retail sales"
+    - "GDP"
+    - "PPI"
+    - "oil prices"
+    - "dollar"
+    - "earnings"
+    - "geopolitics"
+
+rss_feeds:
+  fed:
+    - name: Fed Monetary Policy
+      url: https://www.federalreserve.gov/feeds/press_monetary.xml
+      category: fed
+    - name: Fed Speeches
+      url: https://www.federalreserve.gov/feeds/speeches.xml
+      category: fed
+    - name: Fed Press Releases
+      url: https://www.federalreserve.gov/feeds/press_all.xml
+      category: fed

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.freqtrade.daily-health-check</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/freqtrade-lab/venv/bin/python</string>
+		<string>/Users/w/freqtrade-lab/daily_health_check.py</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/freqtrade-lab</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+	</dict>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>0</integer>
+		<key>Hour</key>
+		<integer>9</integer>
+	</dict>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/freqtrade-lab/logs/daily-health-check.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/freqtrade-lab/logs/daily-health-check.err</string>
+</dict>
+</plist>

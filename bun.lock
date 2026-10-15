@@ -1,0 +1,14 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 0,
+  "workspaces": {
+    "": {
+      "dependencies": {
+        "weixin-ilink": "^0.1.0",
+      },
+    },
+  },
+  "packages": {
+    "weixin-ilink": ["weixin-ilink@0.1.0", "", {}, "sha512-nl2jfWpv3GKO44dA0CdRGytLXzwksR1VeDp8lcrSaqS1fim9LLtyYzFoUlXo68jQ4bJeDTujIWd0RmX6isUl4Q=="],
+  }
+}

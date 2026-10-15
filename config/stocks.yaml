@@ -1,0 +1,204 @@
+# 股票監控清單（由 stock_monitor.py 載入）
+# 使用方式：load_config("config/stocks.yaml")
+
+watch_list:
+  # ── 台股：核心權值與科技股（長線）──
+  - symbol: "2330.TW"
+    code: "2330"
+    name: "台積電（2330）"
+    category: "tw_tech"
+    lower: 800
+    upper: 1500
+
+  - symbol: "2454.TW"
+    code: "2454"
+    name: "聯發科（2454）"
+    category: "tw_tech"
+    lower: 800
+    upper: 1500
+
+  - symbol: "2317.TW"
+    code: "2317"
+    name: "鴻海（2317）"
+    category: "tw_tech"
+    lower: 150
+    upper: 300
+
+  - symbol: "2382.TW"
+    code: "2382"
+    name: "廣達（2382）"
+    category: "tw_tech"
+    lower: 200
+    upper: 400
+
+  - symbol: "2308.TW"
+    code: "2308"
+    name: "台達電（2308）"
+    category: "tw_tech"
+    lower: 300
+    upper: 500
+
+  - symbol: "2303.TW"
+    code: "2303"
+    name: "聯電（2303）"
+    category: "tw_tech"
+    lower: 40
+    upper: 70
+
+  - symbol: "3711.TW"
+    code: "3711"
+    name: "日月光（3711）"
+    category: "tw_tech"
+    lower: 120
+    upper: 200
+
+  - symbol: "3034.TW"
+    code: "3034"
+    name: "聯詠（3034）"
+    category: "tw_tech"
+    lower: 400
+    upper: 700
+
+  - symbol: "2357.TW"
+    code: "2357"
+    name: "華碩（2357）"
+    category: "tw_tech"
+    lower: 350
+    upper: 600
+
+  # ── 台股：金融股（中長線穩健）──
+  - symbol: "2881.TW"
+    code: "2881"
+    name: "富邦金（2881）"
+    category: "tw_finance"
+    lower: 60
+    upper: 100
+
+  - symbol: "2882.TW"
+    code: "2882"
+    name: "國泰金（2882）"
+    category: "tw_finance"
+    lower: 40
+    upper: 80
+
+  - symbol: "2891.TW"
+    code: "2891"
+    name: "中信金（2891）"
+    category: "tw_finance"
+    lower: 25
+    upper: 50
+
+  # 2886.TW 兆豐金 — 2026-04-20 體檢剔除（SEPA 1/7、Value 3/5、無短線訊號，同業中信金/國泰金均優於此）
+
+  # ── 台股：傳產與電信股（防禦型/存股）──
+  - symbol: "1216.TW"
+    code: "1216"
+    name: "統一（1216）"
+    category: "tw_traditional"
+    lower: 60
+    upper: 90
+
+  - symbol: "1301.TW"
+    code: "1301"
+    name: "台塑（1301）"
+    category: "tw_traditional"
+    lower: 50
+    upper: 90
+
+  - symbol: "1303.TW"
+    code: "1303"
+    name: "南亞（1303）"
+    category: "tw_traditional"
+    lower: 50
+    upper: 85
+
+  - symbol: "2002.TW"
+    code: "2002"
+    name: "中鋼（2002）"
+    category: "tw_traditional"
+    lower: 20
+    upper: 35
+
+  - symbol: "2412.TW"
+    code: "2412"
+    name: "中華電（2412）"
+    category: "tw_traditional"
+    lower: 110
+    upper: 140
+
+  - symbol: "3045.TW"
+    code: "3045"
+    name: "台灣大（3045）"
+    category: "tw_traditional"
+    lower: 90
+    upper: 130
+
+  - symbol: "4904.TW"
+    code: "4904"
+    name: "遠傳（4904）"
+    category: "tw_traditional"
+    lower: 70
+    upper: 100
+
+  # ── 大盤指數 ──
+  - symbol: "^TWII"
+    code: "TWII"
+    name: "台股加權（TWII）"
+    category: "tw_index"
+    lower: 20000
+    upper: 28000
+
+  - symbol: "^DJI"
+    code: "DJI"
+    name: "道瓊（DJI）"
+    category: "us_index"
+    lower: 35000
+    upper: 45000
+
+  - symbol: "^IXIC"
+    code: "IXIC"
+    name: "納斯達克（IXIC）"
+    category: "us_index"
+    lower: 15000
+    upper: 20000
+
+  # ── 美股核心科技 ──
+  - symbol: "NVDA"
+    code: "NVDA"
+    name: "輝達（NVDA）"
+    category: "us_tech"
+    lower: 80
+    upper: 200
+
+  - symbol: "TSM"
+    code: "TSM"
+    name: "台積電ADR（TSM）"
+    category: "us_tech"
+    lower: 150
+    upper: 250
+
+  # ── 原物料 / 商品 ──
+  - symbol: "GC=F"
+    code: "GC=F"
+    name: "黃金期貨（GC=F）"
+    category: "commodity"
+    lower: 2000
+    upper: 3000
+
+  - symbol: "CL=F"
+    code: "CL=F"
+    name: "原油期貨（CL=F）"
+    category: "commodity"
+    lower: 60
+    upper: 100
+
+# 各資產類別的預設漲跌幅警報閾值（%）
+# 個股若在 watch_list 中設定 alert_pct，會覆蓋此預設
+alert_defaults:
+  tw_tech: 3.0
+  tw_finance: 2.5
+  tw_traditional: 3.0
+  tw_index: 2.0
+  us_index: 2.0
+  us_tech: 4.0
+  commodity: 5.0

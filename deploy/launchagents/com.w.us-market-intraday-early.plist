@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.us-market-intraday-early</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/.homebrew/bin/python3</string>
+		<string>scripts/us_market_overnight_alert.py</string>
+		<string>--mode</string>
+		<string>intraday</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/Cursor/automation</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/w/.homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+		<key>PYTHONPATH</key>
+		<string>/Users/w/Cursor/automation</string>
+	</dict>
+	<!-- 台灣時間 23:30：美東 10:30（開盤後約 1 小時）早盤方向；波動 >1.5% 才推、不達標只記軌跡 -->
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>30</integer>
+		<key>Hour</key>
+		<integer>23</integer>
+	</dict>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-intraday-early.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-intraday-early.err.log</string>
+</dict>
+</plist>

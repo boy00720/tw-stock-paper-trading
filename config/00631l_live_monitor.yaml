@@ -1,0 +1,119 @@
+# 00631L 實盤監控設定
+# 注意：實盤成本真源仍在 config/sim_watch_only.yaml 的 watch_only.00631L.TW.entry_price。
+# 本檔只放監控來源、關鍵字、門檻與冷卻，不建立第二份成本。
+
+official_notice:
+  enabled: true
+  state_path: logs/official_notice_monitor_state.json
+  audit_path: logs/official_notice_monitor_audit.jsonl
+  request_timeout_seconds: 6
+  max_items_per_source: 20
+  # keywords 是命中詞；anchor_keywords 是必須至少命中其一的核心詞，避免把無關指數定審也推送。
+  anchor_keywords:
+    - "00631L"
+    - "0050"
+    - "臺灣50"
+    - "台灣50"
+    - "FTSE TWSE Taiwan 50"
+    - "富時羅素"
+    - "富時"
+  keywords:
+    - "00631L"
+    - "0050"
+    - "臺灣50"
+    - "台灣50"
+    - "FTSE TWSE Taiwan 50"
+    - "富時羅素"
+    - "富時"
+    - "成分股定期審核"
+    - "季度調整"
+    - "指數審核"
+    - "申購買回"
+    - "PCF"
+    - "折溢價"
+    - "停止申購"
+    - "槓桿型"
+  sources:
+    - id: tip_news_id_probe
+      name: TIP 臺灣指數公司新聞稿
+      url: https://taiwanindex.com.tw/news
+      type: id_probe
+      id_start: 421
+      probe_ahead: 5
+      rewind: 0
+      stop_after_invalid: 3
+    - id: tip_technical_notice
+      name: TIP 臺灣指數公司技術通知
+      url: https://taiwanindex.com.tw/downloads/technical_notice
+      type: links
+    - id: ftse_research_notices
+      name: FTSE Russell Research Index Notices
+      url: https://research.ftserussell.com/products/index-notices/Home/GetNotices/ALL
+      type: links
+    # LSEG 網頁入口與 FTSE Research Portal 重疊；本機 requests 對該站 TLS 易 EOF，避免每 5 分鐘拖慢。
+    # 如需人工核對，仍可手動開：https://www.lseg.com/en/ftse-russell/index-resources/notices
+    - id: yuanta_00631l_basic
+      name: 元大 00631L 官方頁
+      url: https://www.yuantaetfs.com/product/detail/00631L/Basic_information
+      type: page_title
+      # 本機 requests 對元大站憑證偶發 Missing Subject Key Identifier；僅此公開官方頁允許 fallback。
+      verify_tls: false
+    - id: yuanta_00631l_pcf
+      name: 元大 00631L 申購買回清單
+      url: https://www.yuantaetfs.com/tradeInfo/pcf/00631L
+      type: page_title
+      # 本機 requests 對元大站憑證偶發 Missing Subject Key Identifier；僅此公開官方頁允許 fallback。
+      verify_tls: false
+
+live_risk:
+  enabled: true
+  state_path: logs/00631l_live_risk_state.json
+  audit_path: logs/00631l_live_risk_audit.jsonl
+  symbols:
+    - symbol: 00631L.TW
+      name: 元大台灣50正2
+      role: target
+    - symbol: 0050.TW
+      name: 元大台灣50
+      role: baseline
+    - symbol: 2330.TW
+      name: 台積電
+      role: key_weight
+  trading_window:
+    start: "09:00"
+    end: "13:30"
+    close_check_start: "13:20"
+  cooldown_minutes: 60
+  max_quote_age_minutes: 30
+  thresholds:
+    yellow_loss_pct: 0.01
+    red_loss_pct: 0.02
+    strong_red_loss_pct: 0.03
+    target_yellow_day_drop_pct: 0.025
+    target_red_day_drop_pct: 0.04
+    target_strong_day_drop_pct: 0.06
+    baseline_yellow_drop_pct: 0.012
+    baseline_red_drop_pct: 0.02
+    key_weight_yellow_drop_pct: 0.018
+    key_weight_red_drop_pct: 0.03
+    intraday_drawdown_yellow_pct: 0.025
+    intraday_drawdown_red_pct: 0.04
+    profit_protect_pct: 0.03
+    profit_trail_pct: 0.05
+    profit_drawdown_trigger_pct: 0.02
+  message: "00631L 實盤槓桿 ETF 觸發人工風控檢查，請對照 0050/台積電/台指期背景後決定是否減碼或拉保護線。"
+  # ── 以下兩段供 flat（已平倉空手）再進場觀察與 holding 賣點提示用；position_state=holding 時 re_entry 不生效 ──
+  re_entry:
+    # flat 時的再進場機會觀察；以 sim_watch_only.yaml 的 00631L exit_price 為錨。
+    band_low_pct: 0.05              # 現價回到賣出價下方 >=5% 起算觀察帶（離賣出價太近不算回檔夠）
+    band_high_pct: 0.10            # 跌到賣出價下方 10% 為觀察帶下緣；更深視為趨勢下行而非回檔，轉謹慎
+    baseline_strength_pct: 0.003    # 0050 日內 >= +0.3% 視為背景轉強
+    key_weight_strength_pct: 0.0    # 台積電日內不破平盤（>= 0%）
+    target_stabilize_drawdown_pct: 0.015  # 00631L 距日內高點回撤 <=1.5% 視為日內止跌
+    cooldown_minutes: 120           # 空手觀察推送節流，比持倉風控（60）更寬，避免空手期洗版
+    message: "00631L 已空手；以下為再進場機會觀察，非自動買進指令。需回到觀察帶且 0050/台積電轉強、00631L 日內止跌，才考慮分批進場。"
+  sell_signal:
+    # holding 時的賣點提示（選配，已啟用）；協助抓賣出時機，非自動賣出指令。
+    enabled: true
+    profit_take_pct: 0.08           # 浮盈 >=8% 提示可考慮分批止盈
+    trend_break_drawdown_pct: 0.03  # 仍浮盈但自日內高點回撤 >=3%，提示趨勢轉弱可考慮減碼

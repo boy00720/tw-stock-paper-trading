@@ -1,0 +1,119 @@
+# 短線選股規則設定 — stock_screener
+# 所有數值皆針對 3–7 日波段設計，請勿套用長線邏輯。
+
+universe_filter:
+  min_turnover_20d: 50000000   # 近 20 日均額 5 千萬
+  min_price: 10
+  max_price: 2000
+  min_atr_pct: 1.5             # 近 20 日 ATR%，過低代表沒波動
+  max_atr_pct: 12.0            # 過高代表過度躁動（處置股常見）
+  blocklist: []                # 處置股 / 全額交割股，人工維護
+
+# ─────────────────────────────────────────────
+# 量價突破引擎 — 右側交易，總分 100
+# ─────────────────────────────────────────────
+momentum:
+  weights:
+    ret_5d: 20          # 近 5 日報酬率（正向）
+    vol_ratio: 15       # 當日量 / 20 日均量 ≥ 1.5
+    break_20dh: 15      # 突破 20 日新高
+    ma_stack: 10        # 5 > 10 > 20 多頭排列
+    rsi_5: 10           # RSI(5) 落在 55–80
+    macd_hist: 10       # MACD 柱狀由負轉正 / 持續擴張
+    inst_buy: 15        # 三大法人近 3 日同買
+    sector_rps: 5       # 所屬類股 RPS 領先
+  min_total_score: 65
+  pick_top_n: 10
+
+# ─────────────────────────────────────────────
+# 均值回歸引擎 — 左側交易，總分 100
+# ─────────────────────────────────────────────
+rebound:
+  weights:
+    neg_bias_20: 20        # (price - ma20) / ma20 ≤ -8%
+    rsi_5_oversold: 15     # RSI(5) < 30 且昨低今高
+    bullish_reversal: 15   # K 線：長下影 / 吞噬 / 晨星
+    vol_shrink_then_up: 10 # 量縮打底後出量
+    inst_stop_selling: 15  # 法人連 3 日賣 → 轉買
+    distance_to_ma60: 10   # 仍在 MA60 之上（非崩跌）
+    support_bounce: 10     # 接近前低 / 季線支撐
+    sentiment_bonus: 5     # 大盤極度恐慌時加分
+  min_total_score: 60
+  pick_top_n: 10
+
+# ─────────────────────────────────────────────
+# 事件驅動盤後收編（加分 / 扣分 / 警示）
+# ─────────────────────────────────────────────
+event_overlay:
+  enabled: true
+  snapshot_fallback: true
+  momentum:
+    catalyst_bonus: 6
+    sector_risk_penalty: 4
+    fear_bonus: 0
+    greed_penalty: 3
+  rebound:
+    catalyst_bonus: 3
+    sector_risk_penalty: 2
+    fear_bonus: 5
+    greed_penalty: 0
+  warnings:
+    include_summary: true
+    max_items: 3
+
+# ─────────────────────────────────────────────
+# 三大法人加權
+# ─────────────────────────────────────────────
+institutional:
+  foreign_weight: 0.5
+  trust_weight: 0.3
+  dealer_weight: 0.2
+  strong_buy_threshold_shares: 1000   # 單日累計買超 ≥ 1000 張
+  consecutive_days: 3                 # 連續 N 日方向一致
+
+# ─────────────────────────────────────────────
+# 市場情緒綜合分（0–100，高 = 恐慌、低 = 貪婪）
+# ─────────────────────────────────────────────
+sentiment:
+  components:
+    vix: 0.25
+    put_call: 0.15
+    twii_vol_ratio: 0.15
+    margin_change: 0.15
+    dxy_change: 0.10
+    twd_change: 0.10
+    tnx_change: 0.10
+  bands:
+    extreme_fear: 80    # ≥80 → 均值回歸加分、量價突破減碼
+    fear: 60
+    neutral: 40
+    greed: 20
+    extreme_greed: 0    # ≤20 → 量價突破觀望（過熱）
+
+# ─────────────────────────────────────────────
+# 停損 / 停利 / 時間停損
+# ─────────────────────────────────────────────
+exit_rules:
+  momentum:
+    stop_loss_pct: -5
+    take_profit_pct: 10
+    trailing_from_peak: -4
+    time_stop_days: 7
+  rebound:
+    stop_loss_pct: -4
+    take_profit_pct: 7
+    time_stop_days: 5
+
+# ─────────────────────────────────────────────
+# 相關性警示
+# ─────────────────────────────────────────────
+correlation:
+  max_sector_concentration: 0.4   # 同類股占候選 > 40% → 警示
+  max_pairwise_corr: 0.75         # 兩檔 60 日相關 > 0.75 → 擇一
+
+# ─────────────────────────────────────────────
+# 曝險上限
+# ─────────────────────────────────────────────
+exposure:
+  max_total_positions: 10
+  max_sector_positions: 4

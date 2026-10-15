@@ -1,0 +1,77 @@
+# automation/sim/ 模擬盤配置 v1.0
+# 詳細規格見 automation/sim/REQUIREMENTS.md
+# 修改本檔後不需要重啟 service；MatchEngine 載入時讀取
+
+# 起始資金（NTD）
+initial_cash: 1000000
+
+# 市價單滑價（成交價偏移比例）
+# 買單成交價 = quote × (1 + slippage_pct)
+# 賣單成交價 = quote × (1 - slippage_pct)
+slippage_pct: 0.001    # 0.1%
+
+# 撮合迴圈間隔（秒）
+match_interval_sec: 30
+
+# 手續費 / 稅金（依台股實際規則）
+fees:
+  stock:                       # 一般台股
+    commission_pct: 0.001425   # 券商手續費 0.1425%（雙邊）
+    commission_min: 20         # 最低 20 元
+    tax_pct: 0.003             # 證交稅 0.3%（賣方）
+  etf:                         # 國內 ETF
+    commission_pct: 0.001425
+    commission_min: 20
+    tax_pct: 0.001             # 證交稅 0.1%（賣方）
+  futures:                     # 期貨（v2）
+    commission_per_lot: 50     # 手續費每口 50 元（雙邊）
+    tax_pct: 0.00002           # 期交稅 0.002%（雙邊）
+
+# 撮合迴圈會掃這些標的（yfinance 格式：股票代號.TW）
+# v1 起步用兩檔示範，未來由 watchlist_merger 動態合併
+watchlist:
+  - "2330.TW"    # 台積電
+  - "0050.TW"    # 元大台灣 50
+
+# 漲跌停限制（佔前一交易日收盤價的百分比）
+# 限價單超出此範圍會被 reject
+price_limit:
+  stock: 0.10    # ±10%
+  etf: 0.10
+  futures: 0.10  # 商品依交易所規則，v2 再細化
+
+# 標的類型對照（決定費率）
+# v1 簡化：未列在此表的，當作 stock 處理
+symbol_types:
+  "0050.TW": etf
+  "0056.TW": etf
+  "00878.TW": etf
+  "00919.TW": etf
+
+# ─────────────────────────────────────────────────────
+# advisor — Claude 操盤層（M6）
+# 詳細規格見 sim/REQUIREMENTS.md §13 與 sim/M6_PLAN.md
+# ─────────────────────────────────────────────────────
+advisor:
+  # 決策節奏（分鐘）— 跟 launchd plist 的 StartInterval 對齊
+  interval_min: 5
+
+  # 盤中時段（advisor.runner.should_run_now() 用）
+  trading_hours:
+    start: "09:00"
+    end: "13:30"
+
+  # 風控閘三層（risk_guard.py）
+  risk:
+    single_trade_pct: 0.02              # 單筆風險 ≤ equity × 2%
+    concentration_pct: 0.20             # 持倉集中度 ≤ 20%
+    industry_concentration_pct: 0.30    # 同產業 ≤ 30%
+    circuit_pct: 0.03                   # 日內熔斷 ≤ -initial_cash × 3%
+
+  # 四件套指標 baseline 對照
+  metrics:
+    baseline_symbol: "0050.TW"
+
+  # daily_brief 預設參數
+  brief:
+    since_days: 30                      # render_daily_brief 預設 since=30 天前

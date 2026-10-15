@@ -1,0 +1,18 @@
+# automation/config/sim_metrics_excluded_dates.yaml
+# 將特定日期從 sim metrics 樣本中排除（套用於 four_pillars 全部分項：
+# win_rate / cum_realized_pnl / max_drawdown_pct / profit_loss_ratio）。
+# baseline（0050 yfinance）不受此影響，因為它是外部市場資料、不關 sim 系統狀態。
+#
+# 修改後不需重啟服務；下次 advisor metrics / daily_brief 跑時讀取。
+#
+# 條目格式：
+#   - date: "YYYY-MM-DD"
+#     reason: "為什麼排除"
+
+excluded_dates:
+  - date: "2026-05-08"
+    reason: "SE-002/003/004 advisor silent failure 期間（advisor brick），fills/equity 不可信。"
+  - date: "2026-05-09"
+    reason: "brick 延續（週末，雖無交易仍保持區間連續以免 MDD/baseline 對齊錯位）。"
+  - date: "2026-05-10"
+    reason: "brick 延續（週末，雖無交易仍保持區間連續以免 MDD/baseline 對齊錯位）。"

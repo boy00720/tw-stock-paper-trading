@@ -1,0 +1,70 @@
+# 離線日誌錯誤監控配置
+# scripts/log_error_monitor.py 讀取本檔；首次啟用預設從檔案尾端建立 baseline，避免歷史錯誤洗版。
+
+enabled: true
+baseline_on_first_run: true
+cooldown_seconds: 3600
+max_events_per_run: 5
+max_bytes_per_file: 65536
+context_before: 2
+context_after: 2
+
+notify:
+  enabled: true
+  lark_config_path: "config/lark_config.yaml"
+  prefer_open_id_env: "FEISHU_USER_OPEN_ID"
+  fallback_chat_id_env: "FEISHU_DEFAULT_CHAT_ID"
+  fallback_dimension: "stock_monitor_agent"
+
+files:
+  - "logs/error_monitor_probe.log"
+  - "logs/sim/*.err.log"
+  - "logs/sim/launchd-advisor-*.log"
+  - "logs/orchestrator.log"
+  - "logs/api_server.log"
+  - "logs/feishu_bot.log"
+  - "logs/feishu_bot_error.log"
+  - "logs/code_control_audit.jsonl"
+  - "logs/service_control_audit.jsonl"
+  - "logs/workflow_control_audit.jsonl"
+
+# 已知可容忍噪音：命中即不產生事件（不推飛書、不記 audit），只在 result.ignored 計數。
+# 用於 yfinance 盤後 screener 逐檔下載失敗這類「有 fallback、非真故障」的洗版來源。
+# 注意：用帶 .TW/.HK ticker 的精準 pattern，避免吞掉別處真正的 NoneType bug。
+ignore_patterns:
+  - 'Failed download'
+  - '\[.*\.(TW|TWO|HK).*\].*not subscriptable'
+
+rules:
+  - id: traceback
+    severity: critical
+    pattern: "Traceback \\(most recent call last\\)"
+    tags: [python, traceback]
+  - id: critical
+    severity: critical
+    pattern: "\\bCRITICAL\\b|\\[CRITICAL\\]"
+    tags: [critical]
+  - id: error
+    severity: error
+    pattern: "\\bERROR\\b|\\[ERROR\\]"
+    tags: [error]
+  - id: exception
+    severity: error
+    pattern: "\\bException\\b|例外|異常"
+    tags: [exception]
+  - id: yfinance-rate-limit
+    severity: warning
+    pattern: "YFRateLimitError|Too Many Requests|Rate limited"
+    tags: [yfinance, rate_limit, known_issue]
+  - id: wechat-context-token
+    severity: warning
+    pattern: "stale context_token|missing valid context_token"
+    tags: [wechat, known_issue]
+  - id: larknotifier-scope
+    severity: critical
+    pattern: "name 'LarkNotifier' is not defined"
+    tags: [feishu, regression]
+  - id: sim-stop-same-price-trail
+    severity: warning
+    pattern: "trail raised: stop\\s+([0-9.]+)\\s*(?:→|->)\\s*\\1\\b"
+    tags: [sim, auto_stop, regression]

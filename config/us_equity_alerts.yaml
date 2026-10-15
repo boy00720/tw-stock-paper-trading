@@ -1,0 +1,27 @@
+# 個股事件告警控制。預設不推送，只建立本機告警佇列。
+enabled: false
+min_severity: high
+cooldown_seconds: 1800
+# 留空代表所有符合門檻的股票；填入後只推送白名單。
+watch_symbols:
+  - TSM
+  - COMP
+  - NVDA
+  - SOXX
+  - SOX
+  - SMH
+  - MU
+  - SKHYV
+  - DRAM
+  - RAM
+  - TQQQ
+# 主題/指數別名：事件實際落在展開後的標的時，仍視為命中白名單。
+watch_aliases:
+  COMP: ["^IXIC", "COMP"]
+  SOX: ["^SOX", "SOX"]
+  DRAM: ["MU", "WDC", "STX", "DRAM"]
+  RAM: ["MU", "WDC", "STX", "RAM"]
+  SKHYV: ["SKHYV", "000660.KS"]
+channels:
+  feishu: true
+  wechat: false

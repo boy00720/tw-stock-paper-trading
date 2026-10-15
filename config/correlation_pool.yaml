@@ -1,0 +1,97 @@
+# 00631L 相關性追蹤池（單一事實源）
+#
+# 用途：盤前/盤中/盤後/美股各時段「00631L + 台積電 + 相關性股票」追蹤線共用此配置，
+#       不與選股池（stocks.yaml watch_list）混用——這裡的標的只供「風險連動觀察」，
+#       不進 sim advisor 選股評分、不自動下單。
+#
+# 分層依據：00631L = 元大台灣50正2（2 倍槓桿），命運驅動鏈為
+#   0050/^TWII（標的指數）→ 2330/2317（最大權值）→ 半導體供應鏈 → 美股隔夜連動。
+#
+# 每個 tier 的標的：
+#   symbol     : 報價代號（.TW 上市 / .TWO 上櫃 / 美股原樣）
+#   name       : 顯示名
+#   role       : 在連動鏈中的角色（顯示用）
+#   markets    : 哪些時段抓得到報價（tw=台股盤中可抓現貨；us=美股時段；adr=美股 ADR）
+#   importance : core / high / normal（對比段排序與「同步性」判斷權重）
+
+correlation_pool:
+  # ── 核心錨點：00631L 標的指數本身 ──
+  anchor:
+    - symbol: "0050.TW"
+      name: "元大台灣50"
+      role: "00631L 標的指數（2 倍槓桿源頭）"
+      markets: ["tw"]
+      importance: core
+    - symbol: "^TWII"
+      name: "加權指數"
+      role: "大盤總體（0050 高度連動）"
+      markets: ["tw"]
+      importance: core
+    - symbol: "00631L.TW"
+      name: "元大台灣50正2"
+      role: "實盤持倉本體（2 倍槓桿）"
+      markets: ["tw"]
+      importance: core
+    - symbol: "00632R.TW"
+      name: "元大台灣50反1"
+      role: "反向對照（確認轉弱時的對照工具）"
+      markets: ["tw"]
+      importance: normal
+
+  # ── 權值驅動：0050 最大權重，直接決定槓桿 ETF 方向 ──
+  weight_drivers:
+    - symbol: "2330.TW"
+      name: "台積電"
+      role: "0050 最大權值（約 50%）；半導體主軸"
+      markets: ["tw"]
+      importance: core
+    - symbol: "2317.TW"
+      name: "鴻海"
+      role: "0050 權值前段；AI 伺服器鏈"
+      markets: ["tw"]
+      importance: high
+
+  # ── 半導體供應鏈：與 2330 同步性是隔日台股情緒關鍵 ──
+  semiconductor_chain:
+    - symbol: "2454.TW"
+      name: "聯發科"
+      role: "IC 設計龍頭"
+      markets: ["tw"]
+      importance: high
+    - symbol: "3711.TW"
+      name: "日月光投控"
+      role: "封測龍頭"
+      markets: ["tw"]
+      importance: normal
+    - symbol: "2308.TW"
+      name: "台達電"
+      role: "電源/散熱；AI 伺服器鏈"
+      markets: ["tw"]
+      importance: normal
+
+  # ── 美股隔夜連動：台股時段無報價，美股時段唯一能盯的台股相關標的 ──
+  us_overnight:
+    - symbol: "TSM"
+      name: "TSM ADR"
+      role: "台積電 ADR（隔日台積電/權值情緒前哨）"
+      markets: ["us", "adr"]
+      importance: core
+    - symbol: "NVDA"
+      name: "NVIDIA"
+      role: "AI/半導體風險偏好領頭"
+      markets: ["us"]
+      importance: high
+    - symbol: "SOXX"
+      name: "SOXX 半導體 ETF"
+      role: "費半方向（半導體族群同步性）"
+      markets: ["us"]
+      importance: high
+
+# 對比差異機制參數（各時段共用語意，數值可分時段覆寫）
+comparison:
+  # 台股盤中事件式可重推：已推過的標的，相對「上次推送」再變動超過步進閾值才重推
+  intraday_restep:
+    up_threshold_pct: 3.0      # 漲幅再 +3% 才重推
+    down_threshold_pct: 2.5    # 跌幅再 -2.5% 就重推（配合 2 倍槓桿，下跌更敏感）
+  # 跨輪快照對比時效（小時）：超過視為跨日/跨大段，不對比
+  snapshot_max_age_hours: 10.0

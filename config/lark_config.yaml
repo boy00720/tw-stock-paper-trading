@@ -1,0 +1,112 @@
+# 飛書通知配置
+
+# 飛書機器人信息
+bot:
+  name: "AI Personal Assistant Team"
+  avatar: "/image_path"
+  description: "專為您提供各種 AI 助理服務"
+
+  # 機器人 Webhook URL
+  webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/"
+
+  # 機器人 App ID 和 App Secret (選填)
+  app_id: ""
+  app_secret: ""
+
+  # 安全驗證類型
+  verification_type: "verification_code"  # 或 "signing_secret"
+
+# 多維度消息通知
+dimensions:
+  news_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "news_template"
+    frequency: "daily"
+
+  daily_report_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "daily_report_template"
+    frequency: "daily"
+
+  stock_monitor_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "stock_alert_template"
+    frequency: "realtime"
+
+  stock_report_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "stock_report_template"
+    frequency: "daily"
+
+  ecommerce_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "ecommerce_report_template"
+    frequency: "weekly"
+
+  reflection_agent:
+    enabled: true
+    channel_id: "oc_your_feishu_chat_id"
+    template: "reflection_template"
+    frequency: "weekly"
+
+# 消息模板映射
+templates:
+  news_template: "templates/news_template.md"
+  daily_report_template: "templates/daily_report_template.md"
+  stock_alert_template: "templates/stock_alert_template.md"
+  ecommerce_report_template: "templates/ecommerce_report_template.md"
+  reflection_template: "templates/reflection_template.md"
+
+# 通知設置
+notifications:
+  # 推送時間安排
+  schedule:
+    news_agent: "08:00"
+    daily_report_agent: "09:00"
+    stock_monitor_agent: "09:30"
+
+  # 警告級別設置
+  alert_levels:
+    critical: true  # 嚴重警報
+    warning: true   # 警告警報
+    info: true     # 資訊通知
+
+  # 消息格式設置
+  message_settings:
+    max_length: 2000  # 消息最大長度
+    use_markdown: true  # 使用 Markdown 格式
+    enable_at_all: false  # 是否 @ 所有人
+    enable_mention: true  # 啟用 @提及
+
+# 認證和安全性
+security:
+  # 自定義簽名密碼
+  signing_secret: "your_signing_secret_here"
+
+  # 驗證方式
+  verification:
+    enabled: true
+    code: "your_verification_code"  # 驗證碼
+
+# 日誌記錄
+logging:
+  level: "INFO"
+  file: "logs/lark_notifications.log"
+  max_file_size: "10MB"
+  backup_count: 5
+
+# 錯誤處理
+error_handling:
+  retry_attempts: 3
+  retry_delay: 5  # 秒
+  notify_on_error: true  # 錯誤時是否通知
+
+# API 限制
+rate_limiting:
+  requests_per_minute: 60
+  burst_size: 10

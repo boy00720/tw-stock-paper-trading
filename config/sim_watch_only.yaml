@@ -1,0 +1,37 @@
+watch_only:
+  00631L.TW:
+    source: "manual_live_position"
+    # 範例值：公開版不含真實持倉。position_state: holding=實盤持倉中；flat=已平倉空手。
+    # 賣出當天改 flat 並填 exit_price / exit_date；買回當天改 holding 並更新 entry_price。
+    position_state: "holding"
+    entry_price: 30.00
+    entry_date: "2026-01-02"
+    quantity_shares: 1000
+    previous_entry_price: 31.00
+    previous_exit_price: 29.00
+    previous_exit_date: "2025-12-30"
+    reason: "範例：手動記錄的實盤持倉，只供人工風控提醒；sim 策略軌另以 sim orders/fills 獨立計算。"
+    review_rule: "範例：以 entry_price 為本輪人工成本基準，搭配 0050/台積電背景與盤中風控提醒，不自動下單。"
+    action_rule:
+      type: "leveraged_etf_watch"
+      yellow_loss_pct: 0.01
+      red_loss_pct: 0.02
+      strong_red_loss_pct: 0.03
+      profit_protect_pct: 0.03
+      profit_trail_pct: 0.05
+      message: "00631L 觸發人工風控檢查，請以 entry_price 為成本基準，對照 0050/台積電背景後人工決策。"
+  2379.TW:
+    reason: "建倉波動段，先觀察是否確認轉弱再補 stop。"
+    review_rule: "若跌破 avg_cost 1% 以上或下一輪 advisor 將其判為 signal_broken / risk_off，轉補 auto-stop。"
+    action_rule:
+      type: "below_avg_cost_pct"
+      pct: 0.01
+      message: "現價跌破 avg_cost 1% 以上，建議轉補 auto-stop。"
+  6446.TW:
+    reason: "保守 3% stop 太貼近現價，容易被短波動洗出，先觀察是否脫離洗價區。"
+    review_rule: "若與現價拉開安全距離（例如 stop 不再貼近現價）或下一輪 advisor 重新加倉 / 上修 stop_loss，再轉補 auto-stop。"
+    action_rule:
+      type: "stop_distance_from_quote_pct"
+      stop_pct_from_avg_cost: 0.03
+      min_distance_pct: 0.02
+      message: "保守 3% stop 已與現價拉開至少 2%，可考慮轉補 auto-stop。"

@@ -1,0 +1,731 @@
+{
+  "updated_at": "2026-04-30T08:19:49.110904",
+  "schema_version": 2,
+  "summary": {
+    "short_term_count": 18,
+    "medium_term_count": 0,
+    "long_term_count": 11,
+    "intraday_count": 2,
+    "intraday_strict_count": 1,
+    "cross_signals_count": 2
+  },
+  "formal_pools": {
+    "short_term": [
+      {
+        "symbol": "2383.TW",
+        "name": "台光電（2383）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 4475.0,
+        "price": 4475.0,
+        "stop_loss": 4251.25,
+        "take_profit": 4922.5,
+        "time_stop_date": "2026-05-02",
+        "score": 84,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 20,
+          "vol_ratio": 6,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 5,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          4452.62,
+          4519.75
+        ]
+      },
+      {
+        "symbol": "2454.TW",
+        "name": "聯發科（2454）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 2435.0,
+        "price": 2435.0,
+        "stop_loss": 2313.25,
+        "take_profit": 2678.5,
+        "time_stop_date": "2026-05-02",
+        "score": 83,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 20,
+          "vol_ratio": 10,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 0,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          2422.82,
+          2459.35
+        ]
+      },
+      {
+        "symbol": "3037.TW",
+        "name": "欣興（3037）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 790.0,
+        "price": 790.0,
+        "stop_loss": 750.5,
+        "take_profit": 869.0,
+        "time_stop_date": "2026-05-02",
+        "score": 78,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 20,
+          "vol_ratio": 0,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 5,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          786.05,
+          797.9
+        ]
+      },
+      {
+        "symbol": "2330.TW",
+        "name": "台積電（2330）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 2185.0,
+        "price": 2185.0,
+        "stop_loss": 2075.75,
+        "take_profit": 2403.5,
+        "time_stop_date": "2026-05-02",
+        "score": 73,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 6,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 0,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          2174.07,
+          2206.85
+        ]
+      },
+      {
+        "symbol": "6669.TW",
+        "name": "緯穎（6669）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 4635.0,
+        "price": 4635.0,
+        "stop_loss": 4403.25,
+        "take_profit": 5098.5,
+        "time_stop_date": "2026-05-02",
+        "score": 73,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 20,
+          "vol_ratio": 15,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 0,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          4611.82,
+          4681.35
+        ]
+      },
+      {
+        "symbol": "8046.TW",
+        "name": "南電（8046）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 874.0,
+        "price": 874.0,
+        "stop_loss": 830.3,
+        "take_profit": 961.4,
+        "time_stop_date": "2026-05-02",
+        "score": 73,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 20,
+          "vol_ratio": 0,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 0,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          869.63,
+          882.74
+        ]
+      },
+      {
+        "symbol": "2356.TW",
+        "name": "英業達（2356）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 48.099998474121094,
+        "price": 48.099998474121094,
+        "stop_loss": 45.69,
+        "take_profit": 52.91,
+        "time_stop_date": "2026-05-02",
+        "score": 72,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 10,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          47.86,
+          48.58
+        ]
+      },
+      {
+        "symbol": "0050.TW",
+        "name": "元大台灣50（0050）",
+        "engine": "momentum",
+        "pick_date": "2026-04-25",
+        "entry_price": 89.94999694824219,
+        "price": 89.94999694824219,
+        "stop_loss": 85.45,
+        "take_profit": 98.94,
+        "time_stop_date": "2026-05-02",
+        "score": 72,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 0,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 5,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          89.5,
+          90.85
+        ]
+      },
+      {
+        "symbol": "2408.TW",
+        "name": "南亞科（2408）",
+        "engine": "momentum",
+        "pick_date": "2026-04-27",
+        "entry_price": 226.5,
+        "price": 226.5,
+        "stop_loss": 215.17,
+        "take_profit": 249.15,
+        "time_stop_date": "2026-05-04",
+        "score": 68,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 6,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          225.37,
+          228.77
+        ]
+      },
+      {
+        "symbol": "2344.TW",
+        "name": "華邦電（2344）",
+        "engine": "momentum",
+        "pick_date": "2026-04-27",
+        "entry_price": 93.9000015258789,
+        "price": 93.9000015258789,
+        "stop_loss": 89.21,
+        "take_profit": 103.29,
+        "time_stop_date": "2026-05-04",
+        "score": 67,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 10,
+          "break_20dh": 0,
+          "ma_stack": 5,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          93.43,
+          94.84
+        ]
+      },
+      {
+        "symbol": "2474.TW",
+        "name": "可成（2474）",
+        "engine": "momentum",
+        "pick_date": "2026-04-27",
+        "entry_price": 225.0,
+        "price": 225.0,
+        "stop_loss": 213.75,
+        "take_profit": 247.5,
+        "time_stop_date": "2026-05-04",
+        "score": 67,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 10,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 5,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          223.88,
+          227.25
+        ]
+      },
+      {
+        "symbol": "2886.TW",
+        "name": "兆豐金（2886）",
+        "engine": "momentum",
+        "pick_date": "2026-04-28",
+        "entry_price": 40.150001525878906,
+        "price": 40.150001525878906,
+        "stop_loss": 38.14,
+        "take_profit": 44.17,
+        "time_stop_date": "2026-05-05",
+        "score": 69,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 0,
+          "vol_ratio": 6,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          39.95,
+          40.55
+        ]
+      },
+      {
+        "symbol": "2317.TW",
+        "name": "鴻海（2317）",
+        "engine": "momentum",
+        "pick_date": "2026-04-28",
+        "entry_price": 225.5,
+        "price": 225.5,
+        "stop_loss": 214.22,
+        "take_profit": 248.05,
+        "time_stop_date": "2026-05-05",
+        "score": 67,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 14,
+          "vol_ratio": 10,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 5,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          224.37,
+          227.75
+        ]
+      },
+      {
+        "symbol": "2881.TW",
+        "name": "富邦金（2881）",
+        "engine": "momentum",
+        "pick_date": "2026-04-29",
+        "entry_price": 91.30000305175781,
+        "price": 91.30000305175781,
+        "stop_loss": 86.74,
+        "take_profit": 100.43,
+        "time_stop_date": "2026-05-06",
+        "score": 71,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 8,
+          "vol_ratio": 10,
+          "break_20dh": 15,
+          "ma_stack": 10,
+          "rsi_5": 0,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          90.84,
+          92.21
+        ]
+      },
+      {
+        "symbol": "2882.TW",
+        "name": "國泰金（2882）",
+        "engine": "momentum",
+        "pick_date": "2026-04-29",
+        "entry_price": 78.5999984741211,
+        "price": 78.5999984741211,
+        "stop_loss": 74.67,
+        "take_profit": 86.46,
+        "time_stop_date": "2026-05-06",
+        "score": 71,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 8,
+          "vol_ratio": 15,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          78.21,
+          79.39
+        ]
+      },
+      {
+        "symbol": "2883.TW",
+        "name": "開發金（2883）",
+        "engine": "momentum",
+        "pick_date": "2026-04-29",
+        "entry_price": 21.700000762939453,
+        "price": 21.700000762939453,
+        "stop_loss": 20.62,
+        "take_profit": 23.87,
+        "time_stop_date": "2026-05-06",
+        "score": 67,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 8,
+          "vol_ratio": 6,
+          "break_20dh": 15,
+          "ma_stack": 0,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          21.59,
+          21.92
+        ]
+      },
+      {
+        "symbol": "2377.TW",
+        "name": "微星（2377）",
+        "engine": "momentum",
+        "pick_date": "2026-04-29",
+        "entry_price": 100.0,
+        "price": 100.0,
+        "stop_loss": 95.0,
+        "take_profit": 110.0,
+        "time_stop_date": "2026-05-06",
+        "score": 66,
+        "inst_signal": "強買",
+        "breakdown": {
+          "ret_5d": 8,
+          "vol_ratio": 10,
+          "break_20dh": 0,
+          "ma_stack": 10,
+          "rsi_5": 10,
+          "macd_hist": 10,
+          "inst_buy": 15,
+          "sector_rps": 3
+        },
+        "entry_zone": [
+          99.5,
+          101.0
+        ]
+      },
+      {
+        "symbol": "2382.TW",
+        "name": "廣達（2382）",
+        "engine": "rebound",
+        "pick_date": "2026-04-30",
+        "entry_price": 322.0,
+        "price": 322.0,
+        "stop_loss": 309.12,
+        "take_profit": 344.54,
+        "time_stop_date": "2026-05-05",
+        "score": 60,
+        "inst_signal": "強買",
+        "breakdown": {
+          "neg_bias_20": 0,
+          "rsi_5_oversold": 15,
+          "bullish_reversal": 7,
+          "vol_shrink_then_up": 0,
+          "inst_stop_selling": 15,
+          "distance_to_ma60": 10,
+          "support_bounce": 5,
+          "sentiment_bonus": 0
+        },
+        "entry_zone": [
+          318.78,
+          323.61
+        ]
+      }
+    ],
+    "medium_term": [],
+    "long_term": [
+      {
+        "symbol": "2357.TW",
+        "name": "華碩（2357）",
+        "sector": "電子代工",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "2377.TW",
+        "name": "微星（2377）",
+        "sector": "電子代工",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 2,
+        "last_passed": false
+      },
+      {
+        "symbol": "2891.TW",
+        "name": "中信金（2891）",
+        "sector": "金融",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "1535.TW",
+        "name": "中宇（1535）",
+        "sector": "電機",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "2727.TW",
+        "name": "王品（2727）",
+        "sector": "餐飲",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "2303.TW",
+        "name": "聯電（2303）",
+        "sector": "半導體",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "2379.TW",
+        "name": "瑞昱（2379）",
+        "sector": "半導體",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "3034.TW",
+        "name": "聯詠（3034）",
+        "sector": "半導體",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "5347.TWO",
+        "name": "世界先進（5347）",
+        "sector": "半導體",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "2317.TW",
+        "name": "鴻海（2317）",
+        "sector": "電子代工",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 3,
+        "last_passed": true
+      },
+      {
+        "symbol": "1476.TW",
+        "name": "儒鴻（1476）",
+        "sector": "紡織",
+        "framework": "Value",
+        "pool_entry_date": "2026-04-28",
+        "freshness_until": "2026-07-27",
+        "consecutive_months": 2,
+        "last_passed": true
+      }
+    ]
+  },
+  "auxiliary_signals": {
+    "intraday": [
+      {
+        "symbol": "3661.TW",
+        "name": "世芯-KY（3661）",
+        "sector": "半導體",
+        "framework": "Intraday",
+        "scan_date": "2026-04-22",
+        "strict_passed": true,
+        "strict_hard_fails": [],
+        "checks": {
+          "① 漲幅 3%-7%": true,
+          "② 近3日動能>7%": true,
+          "③ 市值<3000億": false,
+          "④ 量比>1.5": true,
+          "⑤ 換手率 3%-10%": true,
+          "⑥ 收在開盤上+近5日新高 (代理)": false
+        },
+        "values": {
+          "當日漲幅": "3.13%",
+          "現價": 3625.0,
+          "近3日最大漲幅": "8.26%",
+          "市值(億)": 3239.0,
+          "量比": 2.15,
+          "換手率估": "5.85%",
+          "換手率來源": "sharesOutstanding",
+          "開盤": 3745.0,
+          "今日高": 3985.0,
+          "通過數": 4,
+          "未通過數": 2,
+          "無資料": 0,
+          "score": 30,
+          "core_ok": true,
+          "hard_fails": [
+            "③ 市值<3000億"
+          ],
+          "strict_hard_fails": []
+        },
+        "notes": [
+          "⑥ 為日線代理；實際需盤中 14:30 後看分時圖"
+        ]
+      },
+      {
+        "symbol": "5483.TWO",
+        "name": "中美晶（5483）",
+        "sector": "半導體",
+        "framework": "Intraday",
+        "scan_date": "2026-04-22",
+        "strict_passed": false,
+        "strict_hard_fails": [
+          "② 近3日動能>7%"
+        ],
+        "checks": {
+          "① 漲幅 3%-7%": true,
+          "② 近3日動能>7%": false,
+          "③ 市值<3000億": true,
+          "④ 量比>1.5": true,
+          "⑤ 換手率 3%-10%": true,
+          "⑥ 收在開盤上+近5日新高 (代理)": false
+        },
+        "values": {
+          "當日漲幅": "5.62%",
+          "現價": 131.5,
+          "近3日最大漲幅": "4.10%",
+          "市值(億)": 826.0,
+          "量比": 2.81,
+          "換手率估": "4.15%",
+          "換手率來源": "sharesOutstanding",
+          "開盤": 133.0,
+          "今日高": 141.0,
+          "通過數": 4,
+          "未通過數": 2,
+          "無資料": 0,
+          "score": 30,
+          "core_ok": true,
+          "hard_fails": [
+            "② 近3日動能>7%"
+          ],
+          "strict_hard_fails": [
+            "② 近3日動能>7%"
+          ]
+        },
+        "notes": [
+          "⑥ 為日線代理；實際需盤中 14:30 後看分時圖"
+        ]
+      }
+    ]
+  },
+  "cross_signals": {
+    "2317.TW": {
+      "name": "鴻海（2317）",
+      "pools": [
+        "long_term",
+        "short_term"
+      ],
+      "level": "⭐⭐ 便宜股有人開始買",
+      "notes": {
+        "short": "量價突破評分 67",
+        "long": "價值進池 2026-04-28"
+      },
+      "summary": "長線、短線｜⭐⭐ 便宜股有人開始買｜量價突破評分 67；價值進池 2026-04-28"
+    },
+    "2377.TW": {
+      "name": "微星（2377）",
+      "pools": [
+        "long_term",
+        "short_term"
+      ],
+      "level": "⭐⭐ 便宜股有人開始買",
+      "notes": {
+        "short": "量價突破評分 66",
+        "long": "價值進池 2026-04-28"
+      },
+      "summary": "長線、短線｜⭐⭐ 便宜股有人開始買｜量價突破評分 66；價值進池 2026-04-28"
+    }
+  }
+}

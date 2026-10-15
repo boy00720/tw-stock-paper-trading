@@ -1,0 +1,191 @@
+# 新聞源配置文件
+
+# 推薦：直接維護 RSS 來源（NewsFetcher 會優先使用這個區塊）
+rss_sources:
+  - name: "BBC 中文"
+    url: "https://feeds.bbci.co.uk/zhongwen/trad/rss.xml"
+    region: "international"
+    category: "politics"
+    lang: "zh"
+
+  - name: "Google 新聞 台灣"
+    url: "https://news.google.com/rss?hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
+    region: "taiwan"
+    category: "society"
+    lang: "zh"
+
+  - name: "自由時報"
+    url: "https://news.ltn.com.tw/rss/all.xml"
+    region: "taiwan"
+    category: "society"
+    lang: "zh"
+
+  - name: "Google 新聞 中文"
+    url: "https://news.google.com/rss?hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
+    region: "china"
+    category: "politics"
+    lang: "zh"
+
+  - name: "新華社"
+    url: "http://www.xinhuanet.com/politics/news_politics.xml"
+    region: "china"
+    category: "politics"
+    lang: "zh"
+
+  - name: "Yahoo Finance"
+    url: "https://finance.yahoo.com/rss/topstories"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "Yahoo Finance News"
+    url: "https://finance.yahoo.com/news/rssindex"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "MarketWatch Top Stories"
+    url: "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "CNBC US Top News"
+    url: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "CNBC Economy"
+    url: "https://www.cnbc.com/id/20910258/device/rss/rss.html"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "WSJ Markets"
+    url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "Fed Monetary Policy"
+    url: "https://www.federalreserve.gov/feeds/press_monetary.xml"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "Fed Speeches"
+    url: "https://www.federalreserve.gov/feeds/speeches.xml"
+    region: "international"
+    category: "economy"
+    lang: "en"
+
+  - name: "Google 新聞 國際"
+    url: "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
+    region: "international"
+    category: "politics"
+    lang: "en"
+
+# 國際新聞源
+international:
+  sources:
+    - name: Reuters
+      url: "https://www.reuters.com"
+      type: rss_feed
+      priority: high
+      categories: ["politics", "economy", "technology"]
+
+    - name: AP_News
+      url: "https://apnews.com"
+      type: html_scrape
+      priority: medium
+      categories: ["world", "technology", "sports"]
+
+    - name: Bloomberg
+      url: "https://www.bloomberg.com"
+      type: rss_feed
+      priority: high
+      categories: ["business", "technology", "politics"]
+
+    - name: The_Economist
+      url: "https://www.economist.com"
+      type: html_scrape
+      priority: medium
+      categories: ["analysis", "business", "technology"]
+
+# 國內新聞源
+china:
+  sources:
+    - name: Xinhua_News
+      url: "http://www.xinhuanet.com"
+      type: html_scrape
+      priority: high
+      categories: ["politics", "economy", "society"]
+
+    - name: Caixin
+      url: "https://www.caixin.com"
+      type: html_scrape
+      priority: medium
+      categories: ["business", "technology", "policy"]
+
+    - name: Sina_News
+      url: "https://news.sina.com.cn"
+      type: html_scrape
+      priority: medium
+      categories: ["politics", "economy", "technology"]
+
+# 台灣新聞源
+taiwan:
+  sources:
+    - name: Central_News_Agency
+      url: "https://www.cna.com.tw"
+      type: html_scrape
+      priority: high
+      categories: ["politics", "society", "economy"]
+
+    - name: United_Daily_News
+      url: "https://udn.com"
+      type: html_scrape
+      priority: medium
+      categories: ["politics", "society", "entertainment"]
+
+    - name: Apple_Daily
+      url: "https://www.appledaily.com"
+      type: html_scrape
+      priority: medium
+      categories: ["society", "entertainment", "politics"]
+
+# 配置選項
+crawling:
+  frequency: 15  # 爬蟲頻率（分鐘）
+  max_articles: 20  # 每次爬取最大文章數
+  timeout: 30  # 爬蟲超時時間（秒）
+  retry_attempts: 3  # 重試次數
+  cache_size: 1000  # 緩存大小
+
+# 新聞分類權重
+categories:
+  politics: 0.8
+  economy: 0.7
+  technology: 0.6
+  society: 0.5
+  entertainment: 0.3
+  sports: 0.3
+
+# 過濾規則
+filters:
+  # 過濾掉包含以下詞語的新聞
+  exclude_keywords: ["廣告", "推廣", " blogging", "clickbait"]
+
+  # 只包含以下詞語的新聞
+  include_keywords: ["important", "breaking", "exclusive", "analysis"]
+
+  # 新聞長度限制（字元數）
+  min_length: 200
+  max_length: 2000
+
+# 輸出配置
+output:
+  format: "markdown"
+  max_length: 500  # 摘要最大長度
+  timezone: "Asia/Taipei"

@@ -1,0 +1,10 @@
+{
+  "botToken": "<your_ilink_bot_token>",
+  "accountId": "<your_bot_account>@im.bot",
+  "baseUrl": "https://ilinkai.weixin.qq.com",
+  "userId": "<your_wechat_user_id>@im.wechat",
+  "allowed_wx_ids": [
+    "<your_wechat_user_id>@im.wechat"
+  ],
+  "enable_auth": true
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.us-market-premarket-us</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/.homebrew/bin/python3</string>
+		<string>scripts/us_market_overnight_alert.py</string>
+		<string>--mode</string>
+		<string>pre_us</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/Cursor/automation</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/w/.homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+		<key>PYTHONPATH</key>
+		<string>/Users/w/Cursor/automation</string>
+	</dict>
+
+	<!-- 台灣時間 21:10：美股開盤前約 20 分（錯開 21:00 既有 crontab×2 與 21:35 開盤雷達）；盤前期貨雷達，資料夠新就推、週末/休市由 freshness 自動跳過 -->
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>10</integer>
+		<key>Hour</key>
+		<integer>21</integer>
+	</dict>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-premarket-us.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-premarket-us.err.log</string>
+</dict>
+</plist>

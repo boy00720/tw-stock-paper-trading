@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.us-market-overnight-close</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/.homebrew/bin/python3</string>
+		<string>scripts/us_market_overnight_alert.py</string>
+		<string>--mode</string>
+		<string>close</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/Cursor/automation</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/w/.homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+		<key>PYTHONPATH</key>
+		<string>/Users/w/Cursor/automation</string>
+	</dict>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>10</integer>
+		<key>Hour</key>
+		<integer>5</integer>
+	</dict>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-overnight-close.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/us-market-overnight-close.err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ meta.title }}</title>
+</head>
+<body>
+  <section class="cover page-break-after">
+    <div class="cover-topbar">
+      <div>
+        <div class="cover-eyebrow">DAILY MARKET BRIEF</div>
+        <h1>{{ meta.title }}</h1>
+        <div class="cover-subtitle">{{ meta.subtitle }}</div>
+      </div>
+      <div class="cover-version-panel">
+        <div class="version-chip">{{ meta.version }}</div>
+        <div class="version-meta">{{ meta.report_date }}</div>
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <span>報告日期｜{{ meta.report_date }}</span>
+      <span>生成時間｜{{ meta.generated_at }}</span>
+      {% if meta.version %}<span>版本｜{{ meta.version }}</span>{% endif %}
+    </div>
+
+    <section class="headline-block avoid-break">
+      <div class="section-label">今日判斷</div>
+      <div class="headline-text">{{ headline.judgment }}</div>
+      {% if headline.stance %}
+      <div class="headline-stance">{{ headline.stance }}</div>
+      {% endif %}
+    </section>
+
+    <section class="cover-kpi-strip avoid-break">
+      {% for item in cover.kpis %}
+      <article class="kpi-card tone-{{ item.tone }}">
+        <div class="kpi-label">{{ item.label }}</div>
+        <div class="kpi-value">{{ item.value }}</div>
+      </article>
+      {% endfor %}
+    </section>
+
+    <section class="summary-grid">
+      <article class="summary-card avoid-break">
+        <div class="card-kicker">Market</div>
+        <h2>市場總結</h2>
+        <p>{{ executive_summary.market_summary }}</p>
+      </article>
+      <article class="summary-card avoid-break">
+        <div class="card-kicker">Shortline</div>
+        <h2>短線焦點</h2>
+        <p>{{ executive_summary.shortline_summary }}</p>
+      </article>
+      <article class="summary-card avoid-break">
+        <div class="card-kicker">Risk</div>
+        <h2>風險摘要</h2>
+        <p>{{ executive_summary.risk_summary }}</p>
+      </article>
+      <article class="summary-card avoid-break">
+        <div class="card-kicker">Next</div>
+        <h2>明日行動</h2>
+        <p>{{ executive_summary.next_action_summary }}</p>
+      </article>
+    </section>
+
+    <section class="cover-bottom-grid">
+      <article class="cover-panel">
+        <div class="panel-header">
+          <div class="section-label">明日執行重點</div>
+          <h2>優先行動</h2>
+        </div>
+        {% if cover.action_items %}
+        <ol class="cover-action-list">
+          {% for item in cover.action_items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ol>
+        {% else %}
+        <div class="empty-state compact-empty">今日無明日行動資料。</div>
+        {% endif %}
+      </article>
+
+      <article class="cover-panel">
+        <div class="panel-header">
+          <div class="section-label">關鍵市場快照</div>
+          <h2>首屏觀察</h2>
+        </div>
+        {% if cover.market_snapshot %}
+        <div class="snapshot-list">
+          {% for row in cover.market_snapshot %}
+          <div class="snapshot-row">
+            <div>
+              <div class="snapshot-name">{{ row.name }}</div>
+              <div class="snapshot-bucket">{{ row.bucket_label }}</div>
+            </div>
+            <div class="snapshot-metrics">
+              <div class="snapshot-price">{{ row.price_text }}</div>
+              <div class="snapshot-change {{ row.change_class }}">{{ row.change_text }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state compact-empty">今日無市場快照資料。</div>
+        {% endif %}
+      </article>
+    </section>
+
+    {% if meta.source_note %}
+    <p class="source-note">{{ meta.source_note }}</p>
+    {% endif %}
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-no">01</div>
+      <h2>市場看點</h2>
+    </div>
+
+    {% if market_overview.snapshot_rows %}
+    <div class="subsection">
+      <h3>市場快照</h3>
+      <table class="data-table market-table">
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>價格</th>
+            <th>變動</th>
+            <th>分類</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in market_overview.snapshot_rows %}
+          <tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.price_text }}</td>
+            <td class="{{ row.change_class }}">{{ row.change_text }}</td>
+            <td>{{ row.bucket_label }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if market_overview.institutional_summary %}
+    <div class="subsection avoid-break">
+      <h3>法人摘要</h3>
+      <div class="plain-block">{{ market_overview.institutional_summary }}</div>
+    </div>
+    {% endif %}
+
+    {% if market_overview.institutional_leaders %}
+    <div class="subsection avoid-break">
+      <h3>法人前五榜</h3>
+      <div class="leader-grid">
+        {% for leader in market_overview.institutional_leaders %}
+        <article class="leader-card">
+          <div class="leader-title">{{ leader.title }}</div>
+          <div class="leader-line"><span>買超</span><span>{{ leader.buy_text }}</span></div>
+          <div class="leader-line"><span>賣超</span><span>{{ leader.sell_text }}</span></div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if narrative.market_commentary %}
+    <div class="narrative-block">
+      <h3>市場判讀</h3>
+      <p>{{ narrative.market_commentary }}</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-no">02</div>
+      <h2>短線選股日報</h2>
+    </div>
+
+    <div class="overview-strip avoid-break">
+      <div class="metric"><span>短線</span><strong>{{ watchlist_overview.short_term_count }}</strong></div>
+      <div class="metric"><span>中線</span><strong>{{ watchlist_overview.medium_term_count }}</strong></div>
+      <div class="metric"><span>長線</span><strong>{{ watchlist_overview.long_term_count }}</strong></div>
+      <div class="metric"><span>日內</span><strong>{{ watchlist_overview.intraday_count }}</strong></div>
+      <div class="metric"><span>跨池</span><strong>{{ watchlist_overview.cross_signals_count }}</strong></div>
+    </div>
+
+    {% if executive_summary.shortline_summary %}
+    <div class="plain-block shortline-summary-block avoid-break">{{ executive_summary.shortline_summary }}</div>
+    {% endif %}
+
+    {% if shortline_focus %}
+    <table class="data-table focus-table">
+      <thead>
+        <tr>
+          <th>標的 / 策略</th>
+          <th>評級 / 現價</th>
+          <th>交易框架</th>
+          <th>技術 / 籌碼</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in shortline_focus %}
+        <tr>
+          <td>
+            <div class="name-cell">{{ item.name }}</div>
+            {% if item.symbol %}<div class="muted">{{ item.symbol }}</div>{% endif %}
+            <div class="inline-meta">{{ item.engine_label }}</div>
+          </td>
+          <td>
+            <div class="score-chip">{{ item.score_label }}</div>
+            <div class="price-line">現價｜{{ item.price_text }}</div>
+          </td>
+          <td>
+            <div class="trade-line"><span>進場</span><strong>{{ item.entry_text }}</strong></div>
+            <div class="trade-line"><span>停損</span><strong>{{ item.stop_text }}</strong></div>
+            <div class="trade-line"><span>目標</span><strong>{{ item.target_text }}</strong></div>
+          </td>
+          <td>
+            <div class="focus-note-block">
+              <div class="focus-note-label">技術</div>
+              <div class="focus-note">{{ item.technical_note }}</div>
+            </div>
+            <div class="focus-note-block institution-note-block">
+              <div class="focus-note-label">法人</div>
+              <div class="institution-note">{{ item.institutional_note }}</div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">今日無短線焦點資料。</div>
+    {% endif %}
+
+    {% if narrative.shortline_commentary_parts %}
+    <div class="narrative-block narrative-shortline">
+      <h3>短線解讀</h3>
+      {% for part in narrative.shortline_commentary_parts %}
+      <p>{{ part }}</p>
+      {% endfor %}
+    </div>
+    {% elif narrative.shortline_commentary %}
+    <div class="narrative-block narrative-shortline">
+      <h3>短線解讀</h3>
+      <p>{{ narrative.shortline_commentary }}</p>
+    </div>
+    {% endif %}
+  </section>
+
+  {% if cross_pool_focus or intraday_focus %}
+  <section class="section">
+    <div class="section-header">
+      <div class="section-no">03</div>
+      <h2>跨池與日內焦點</h2>
+    </div>
+
+    {% if cross_pool_focus %}
+    <div class="subsection">
+      <h3>跨池共振</h3>
+      <table class="data-table compact-table">
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>摘要</th>
+            <th>法人</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cross_pool_focus %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.summary }}</td>
+            <td>{{ item.institutional_note }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if intraday_focus %}
+    <div class="subsection">
+      <h3>日內候選</h3>
+      <table class="data-table compact-table">
+        <thead>
+          <tr>
+            <th>標的</th>
+            <th>狀態</th>
+            <th>阻塞</th>
+            <th>法人</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in intraday_focus %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.strict_text }}</td>
+            <td>{{ item.blockers_text }}</td>
+            <td>{{ item.institutional_note }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if narrative.cross_intraday_commentary %}
+    <div class="narrative-block">
+      <h3>焦點解讀</h3>
+      <p>{{ narrative.cross_intraday_commentary }}</p>
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-no">04</div>
+      <h2>異常與風險</h2>
+    </div>
+
+    {% if risk_alerts %}
+    <div class="risk-grid">
+      {% for item in risk_alerts %}
+      <article class="risk-card avoid-break">
+        <div class="risk-name">{{ item.name }}</div>
+        <div class="risk-price">{{ item.price }}</div>
+        <div class="risk-reason">{{ item.reason }}</div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">今日無異常警示。</div>
+    {% endif %}
+
+    {% if narrative.risk_commentary %}
+    <div class="narrative-block narrative-risk">
+      <h3>風險說明</h3>
+      <p>{{ narrative.risk_commentary }}</p>
+    </div>
+    {% endif %}
+  </section>
+
+  {% if tracking_sections %}
+  <section class="section">
+    <div class="section-header">
+      <div class="section-no">05</div>
+      <h2>追蹤動作清單</h2>
+    </div>
+
+    {% for tracking_section in tracking_sections %}
+    <div class="subsection avoid-break">
+      <h3>{{ tracking_section.title }}</h3>
+      <ul class="appendix-list">
+        {% for tracking_item in tracking_section["items"] %}
+        <li>{{ tracking_item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="section action-section">
+    <div class="section-header">
+      <div class="section-no">06</div>
+      <h2>明日行動清單</h2>
+    </div>
+    <ol class="action-list action-card-list">
+      {% for item in action_items %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  {% if appendix.medium_term_focus or appendix.long_term_focus or appendix.data_notes or appendix.method_note %}
+  <section class="section appendix-section">
+    <div class="section-header">
+      <div class="section-no">07</div>
+      <h2>附錄</h2>
+    </div>
+
+    {% if appendix.medium_term_focus or appendix.long_term_focus %}
+    <div class="subsection avoid-break">
+      <h3>中長線補充</h3>
+      <ul class="appendix-list">
+        {% for item in appendix.medium_term_focus %}
+        <li>中線｜{{ item.name }}｜{{ item.institutional_note }}</li>
+        {% endfor %}
+        {% for item in appendix.long_term_focus %}
+        <li>長線｜{{ item.name }}｜{{ item.institutional_note }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if appendix.data_notes %}
+    <div class="subsection avoid-break">
+      <h3>資料缺失聲明</h3>
+      <ul class="appendix-list">
+        {% for note in appendix.data_notes %}
+        <li>{{ note }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if appendix.method_note %}
+    <div class="subsection avoid-break">
+      <h3>方法聲明</h3>
+      <p>{{ appendix.method_note }}</p>
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if disclaimer %}
+  <footer class="report-footer">
+    {{ disclaimer }}
+  </footer>
+  {% endif %}
+</body>
+</html>

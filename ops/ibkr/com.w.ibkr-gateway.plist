@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- 範本：手動測試通過後再 cp 到 ~/Library/LaunchAgents/ 並 bootstrap。勿在 Gateway/IBC 安裝前載入（會空轉重啟）。 -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.ibkr-gateway</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/w/Cursor/automation/ops/ibkr/start_ibkr_gateway.sh</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>ThrottleInterval</key>
+	<integer>60</integer>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/ibkr-gateway.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/ibkr-gateway.err.log</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/w/.homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+	</dict>
+</dict>
+</plist>

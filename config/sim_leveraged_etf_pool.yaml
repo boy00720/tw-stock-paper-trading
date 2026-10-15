@@ -1,0 +1,52 @@
+# 槓反 ETF 模擬子池（只供 sim advisor 評估，不代表實盤自動交易）
+# 目的：讓模擬盤可用指數方向工具表達多/空，不與一般個股池混用評分。
+
+leveraged_etf:
+  - symbol: "00631L.TW"
+    name: "元大台灣50正2"
+    category: "leveraged_etf"
+    sector: "槓反ETF"
+    underlying: "tw50"
+    direction: "long"
+    leverage: 2.0
+    score: 90
+    min_score: 85
+    max_holding_days: 5
+    risk_budget_multiplier: 0.5
+    notes: "台股大盤強勢時的正向槓桿工具；sim 可自行判斷進出，實盤帳本另由 sim_watch_only.yaml 追蹤。"
+  - symbol: "00632R.TW"
+    name: "元大台灣50反1"
+    category: "inverse_etf"
+    sector: "槓反ETF"
+    underlying: "tw50"
+    direction: "inverse"
+    leverage: -1.0
+    score: 88
+    min_score: 85
+    max_holding_days: 3
+    risk_budget_multiplier: 0.5
+    notes: "台股大盤確認轉弱時的反向工具；禁止與同 underlying 正向槓桿 ETF 同時持有。"
+  - symbol: "00675L.TW"
+    name: "富邦臺灣加權正2"
+    category: "leveraged_etf"
+    sector: "槓反ETF"
+    underlying: "twii"
+    direction: "long"
+    leverage: 2.0
+    score: 88
+    min_score: 85
+    max_holding_days: 5
+    risk_budget_multiplier: 0.5
+    notes: "加權指數正向槓桿工具；與反向同 underlying 互斥。"
+  - symbol: "00676R.TW"
+    name: "富邦臺灣加權反1"
+    category: "inverse_etf"
+    sector: "槓反ETF"
+    underlying: "twii"
+    direction: "inverse"
+    leverage: -1.0
+    score: 86
+    min_score: 85
+    max_holding_days: 3
+    risk_budget_multiplier: 0.5
+    notes: "加權指數反向工具；只在大盤轉弱訊號明確時供 sim 評估。"

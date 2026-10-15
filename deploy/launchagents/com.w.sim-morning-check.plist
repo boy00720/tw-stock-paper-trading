@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.sim-morning-check</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/.homebrew/bin/python3</string>
+		<string>-m</string>
+		<string>sim.morning_check</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/Cursor/automation</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/Users/w/.homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+		<key>PYTHONPATH</key>
+		<string>/Users/w/Cursor/automation</string>
+	</dict>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Minute</key>
+		<integer>55</integer>
+		<key>Hour</key>
+		<integer>8</integer>
+	</dict>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/sim/launchd-morning-check.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/sim/launchd-morning-check.err.log</string>
+</dict>
+</plist>

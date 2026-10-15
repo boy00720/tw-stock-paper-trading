@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(/Users/w/Cursor/automation/logs/chroma_db/**)",
+      "Read(/Users/w/Cursor/automation/logs/finmind_cache.db)",
+      "Read(/Users/w/Cursor/automation/logs/health_check.log)"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.w.feishu-bot</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/w/.homebrew/bin/python3.13</string>
+		<string>/Users/w/Cursor/automation/scripts/feishu_bot.py</string>
+	</array>
+	<key>WorkingDirectory</key>
+	<string>/Users/w/Cursor/automation</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardOutPath</key>
+	<string>/Users/w/Cursor/automation/logs/feishu_bot.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/w/Cursor/automation/logs/feishu_bot_error.log</string>
+</dict>
+</plist>

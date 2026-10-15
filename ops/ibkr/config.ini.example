@@ -1,0 +1,44 @@
+# ============================================================
+# IBC config.ini 範本 — IB Gateway 無人值守接入 05:10 Research Pack
+# ------------------------------------------------------------
+# 用法：
+#   cp ops/ibkr/config.ini.example ~/ibc/config.ini
+#   然後在 ~/ibc/config.ini 填入 paper 帳號憑證
+# 安全紅線：
+#   - 真實憑證只填到 repo 外的 ~/ibc/config.ini，本範本檔絕不填值。
+#   - 本檔可進 git；填了憑證的 config.ini 不可進 git。
+# ============================================================
+
+# ---- 登入（由你填入 paper 帳號；live 帳號請勿填這裡）----
+IbLoginId=
+IbPassword=
+
+# ---- 交易模式：固定 paper（無 2FA、可無人值守、零實盤下單風險）----
+TradingMode=paper
+
+# ---- API 安全鎖（read-only，最高優先；勿改）----
+# Gateway 端強制唯讀 API：即使 client 端送下單請求也會被拒
+ReadOnlyApi=yes
+# 禁止盲下單（額外保險）
+AllowBlindTrading=no
+
+# ---- API 連線設定 ----
+# 強制 API port = 7497，對齊 automation provider 硬編值（utils/ibkr_provider.py:146）
+OverrideTwsApiPort=7497
+# 自動接受本機 API 連線，避免彈窗卡住 provider
+AcceptIncomingConnectionAction=accept
+# 註：Gateway 設定 GUI 的 Trusted IPs 也應只保留 127.0.0.1
+
+# ---- 在線穩定性 ----
+# 不要每日自動登出（改由 AutoRestartTime 做乾淨重啟）
+IbAutoClosedown=no
+# 每日乾淨重啟時間 HH:MM（24h）；務必避開 05:10 close job。paper 無 2FA，重啟後自動回登入態
+AutoRestartTime=02:00
+# 偵測到既有 session 時以本連線為主
+ExistingSessionDetectedAction=primary
+# 啟動後最小化主視窗
+MinimizeMainWindow=yes
+
+# ---- 抑制非必要彈窗（避免無人值守時卡住）----
+AcceptNonBrokerageAccountWarning=yes
+DismissPasswordExpiryWarning=yes
